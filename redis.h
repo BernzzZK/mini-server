@@ -7,11 +7,13 @@
 #include <vector>
 using namespace std;
 
+/// @brief 
 class redisConnection {
 public:
     redisConnection()
     : _ip("127.0.0.1")
     , _port(6379)
+    //, _tv()
     {
         _connect = redisConnect(_ip, _port);
         if(_connect->err != 0){
@@ -30,14 +32,11 @@ public:
         }
     }
 
-    //bool setCommand(char* cmd);
     bool setCommand(char* s, long long v);
     bool setCommand(char* s1, char* s2);
     bool setCommand(long long v, char* s);
     bool setCommand(long long v1, long long v2);
-    // redisContext* geitcontext(){
-    //     return connect;
-    // }
+
 
     string getIntValue(char* key);
     string getIntValue(long long key);
@@ -47,6 +46,15 @@ public:
     vector<char*> keys();
 
     redisContext *getContext();
+
+    /**
+     * @brief just excute cmd, if succeed return true, otherwise return false
+     * 
+     * @param cmd 
+     * @return true 
+     * @return false 
+     */
+    bool command(char* cmd);
 
     ~redisConnection() {
         if(!isFree())
@@ -58,6 +66,7 @@ private:
     redisReply *_result;
     char *_ip;
     int _port;
+    struct timeval _tv;
     bool isFree();
 };
 
