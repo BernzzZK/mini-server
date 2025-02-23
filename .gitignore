@@ -1,5 +1,4 @@
 *.out
 build/*
-makefile
 test.cpp
 *.o
