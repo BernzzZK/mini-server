@@ -52,32 +52,34 @@ bool redisConnection::setCommand(long long v1, long long v2) {
     return true;
 }
 
-string redisConnection::getIntValue(char* key) {
+long long redisConnection::getIntValue(char* key) {
     if (isFree())
-        return nullptr;
+        return 0;
     void *tmp = redisCommand(this->_connect, "get %s", key);
     _result = (redisReply *)tmp;
     if (_result->type != 1) {
         freeReplyObject(this->_result);
-        return nullptr;
+        return 0;
     }
     string value = _result->str;
     freeReplyObject(this->_result);
-    return value;
+    long long res = stoi(value);
+    return res;
 }
 
-string redisConnection::getIntValue(long long key) {
+long long redisConnection::getIntValue(long long key) {
     if (isFree())
-        return nullptr;
+        return 0;
     void *tmp = redisCommand(this->_connect, "get %ld", key);
     _result = (redisReply *)tmp;
     if (_result->type != 1) {
         freeReplyObject(this->_result);
-        return nullptr;
+        return 0;
     }
     string value = _result->str;
     freeReplyObject(this->_result);
-    return value;
+    long long res = stoi(value);
+    return res;
 }
 
 string redisConnection::getStringValue(char* key) {

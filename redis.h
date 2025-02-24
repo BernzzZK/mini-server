@@ -38,8 +38,8 @@ public:
     bool setCommand(long long v1, long long v2);
 
 
-    string getIntValue(char* key);
-    string getIntValue(long long key);
+    long long getIntValue(char* key);
+    long long getIntValue(long long key);
     string getStringValue(char* key);
     string getStringValue(long long key);
 
