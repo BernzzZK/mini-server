@@ -3,8 +3,9 @@
 
 #include <iostream>
 #include <jsoncpp/json/json.h>
-#include <map>
+#include <cassert>
 #include <fstream>
+#include <vector>
 using namespace std;
 using namespace Json;
 
@@ -19,12 +20,9 @@ public:
     void jsonAppend(Value& value);
     
     void saveJson(string filename, int type);
+    void readJson(string filename);
 
-    enum
-    {
-        K_V = 0,
-        V
-    };
+    Value getRoot();
 
     enum
     {
@@ -34,7 +32,9 @@ public:
 
 private:
     Value _root;
+    Reader _read;
     ofstream _ofs;
+    ifstream _ifs;
 };
 
 #endif

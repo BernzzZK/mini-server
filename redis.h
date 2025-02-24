@@ -7,7 +7,6 @@
 #include <vector>
 using namespace std;
 
-/// @brief 
 class redisConnection {
 public:
     redisConnection()
@@ -45,7 +44,7 @@ public:
 
     vector<char*> keys();
 
-    redisContext *getContext();
+    //redisContext *getContext();
 
     /**
      * @brief just excute cmd, if succeed return true, otherwise return false
