@@ -1,3 +1,4 @@
+#pragma onec
 #ifndef _REDIS_H_
 #define _REDIS_H_
 
@@ -65,7 +66,6 @@ private:
     redisReply *_result;
     char *_ip;
     int _port;
-    struct timeval _tv;
     bool isFree();
 };
 
