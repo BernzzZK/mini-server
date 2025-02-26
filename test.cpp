@@ -35,24 +35,51 @@
 //     return 0;
 // }
 
-#include "json.h"
+// #include "json.h"
+
+// int main() {
+//     jsoncpp jc;
+    
+//     // jc.jsonAppend("k1", 1);
+//     // jc.jsonAppend("k2", "v2");
+//     // Value v;
+//     // v["v.k1"] = "v.v1";
+//     // v["v.k2"] = 2;
+//     // jc.jsonAppend(v);
+//     // jc.saveJson("config.json", 0);
+
+//     jc.readJson("config.json");
+//     Value v = jc.getRoot();
+//     Value::Members keys = v.getMemberNames();
+//     for (int i = 0; i < keys.size(); ++i)
+//         cout << keys.at(i) << ": " << v[keys[i]] << ", ";
+//     cout << endl;
+//     return 0;
+// }
+
+#include "ThreadPool.h"
+#include <iostream>
+
+// void calc(int x, int y) {
+//     int z = x + y;
+//     cout << "z: " << z << endl;
+//     this_thread::sleep_for(chrono::seconds(2));
+// }
+
+int calc1(int x, int y) {
+    int z = x + y;
+    this_thread::sleep_for(chrono::seconds(2));
+    return z;
+}
 
 int main() {
-    jsoncpp jc;
-    
-    // jc.jsonAppend("k1", 1);
-    // jc.jsonAppend("k2", "v2");
-    // Value v;
-    // v["v.k1"] = "v.v1";
-    // v["v.k2"] = 2;
-    // jc.jsonAppend(v);
-    // jc.saveJson("config.json", 0);
-
-    jc.readJson("config.json");
-    Value v = jc.getRoot();
-    Value::Members keys = v.getMemberNames();
-    for (int i = 0; i < keys.size(); ++i)
-        cout << keys.at(i) << ": " << v[keys[i]] << ", ";
-    cout << endl;
+    ThreadPool pool;
+    vector<future<int>> res;
+    for (int i = 0; i < 10; ++i) {
+        //auto func = bind(calc, i, i * 2);
+        res.push_back(pool.addTask(calc1, i, i * 2));
+    }
+    for(auto &i:res)
+        cout << "result: " << i.get() << endl;
     return 0;
 }
