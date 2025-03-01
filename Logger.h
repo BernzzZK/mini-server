@@ -3,7 +3,6 @@
 #define _LOGGER_H_
 
 #include <string>
-#include <mutex>
 #include <fstream>
 #include "Timestamp.h"
 #include "nocopyable.h"
@@ -18,16 +17,19 @@ enum logLevel
 
 class Logger : mini_server::nocopyable {
 public:
+    static Logger &getInstance(bool openDebug);
     static Logger &getInstance();
     //void setLogLevel(int level);
     void logINFO(const string& msg);
     void logERROR(const string &msg);
     void logFATAL(const string &msg);
     void logDEBUG(const string &msg);
-    void setLogFile(const string& filePath);
+
+    void setLogFile(const string &filePath);
+
 private:
-    mutex _mutex;
     ofstream _ofs;
+    bool _openDebug;
     string _logFile;
 };
 
