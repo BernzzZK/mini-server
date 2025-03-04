@@ -18,6 +18,7 @@ public:
     Timestamp poll(int timeout, ChannelList *activechannel) override;
     void updateChannel(Channel *channel) override;
     void removeChannel(Channel *activechannel) override;
+    bool hasChannel(Channel *channel);
 
 private:
 

@@ -92,3 +92,8 @@ void EPoller::update(int operation, Channel *channel) {
             Logger::getInstance().logFATAL("epoll_ctl add/mod error: " + to_string(errno));
     }
 }
+
+bool EPoller::hasChannel(Channel *channel) {
+    auto it = _channels.find(channel->fd());
+    return it != _channels.end() && it->second == channel;
+}

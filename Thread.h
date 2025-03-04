@@ -22,6 +22,8 @@ public:
     pid_t tid() { return _tid; }
     const std::string name() { return _name; };
 
+    static int numCreated() { return _numCreated; }
+
 private:
     bool _start;
     bool _join;

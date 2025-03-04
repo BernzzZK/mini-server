@@ -126,9 +126,9 @@ vector<char*> redisConnection::keys() {
     return result;
 }
 
-redisContext* redisConnection::getContext() {
-    return this->_connect;
-}
+// redisContext* redisConnection::getContext() {
+//     return this->_connect;
+// }
 
 bool redisConnection::isFree() {
     if(this->_connect->err != 0)

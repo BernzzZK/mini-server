@@ -20,10 +20,10 @@ public:
     virtual ~Poller() = default;
 
     virtual Timestamp poll(int timeout, ChannelList *activeChannels) = 0;
-    virtual void updateChannel(Channel *channel) =0 ;
+    virtual void updateChannel(Channel *channel) = 0 ;
     virtual void removeChannel(Channel *channel) = 0;
 
-    bool hasChannel(Channel* channel) const;
+    //bool hasChannel(Channel* channel) const;
 
 
     void assertInLoopThread();

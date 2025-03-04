@@ -71,7 +71,7 @@ Poller::Poller(EventLoop* loop)
 // }
 
 void Poller::assertInLoopThread() {
-     _ownerLoop->assertInLoopThread();
+     _ownerLoop->isInLoopThread();
 }
 
 // bool Poller::hasChannel(Channel *channel) const {
